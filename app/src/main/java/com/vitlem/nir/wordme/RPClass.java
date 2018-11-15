@@ -1,5 +1,6 @@
 package com.vitlem.nir.wordme;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.util.Log;
@@ -12,9 +13,9 @@ public class RPClass {
     private MediaPlayer   mPlayer = null;
     private static final String LOG_TAG = "AudioRecordTest";
 
-    public void SetFileName(String f)
+    public void SetFileName(Context c,String f)
     {
-        mFileName=f;
+        String mFileName = c.getFilesDir().getPath().toString() + f;
     }
 
     public void onRecord(boolean start) {
@@ -59,7 +60,7 @@ public class RPClass {
         try {
             mRecorder.prepare();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            Log.e(LOG_TAG, "prepare() failed" + " " + e.getMessage());
         }
 
         mRecorder.start();

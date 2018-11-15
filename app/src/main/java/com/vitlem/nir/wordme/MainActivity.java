@@ -1,6 +1,7 @@
 package com.vitlem.nir.wordme;
 
 import android.Manifest;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,35 +14,36 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
-    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
     private ArrayList<RPClass> arrayRPCobject = new ArrayList<RPClass>();
     private RPClass TempRPCobject= null;
     private boolean Recording = false ;
     private boolean Playing = true ;
+    public final int MY_PERMISSIONS_REQUEST=1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST);
 
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
         final Button RecordButton = findViewById(R.id.RecordButton);
         RecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("RecordButton","ClickRecordButton");
-                if (TempRPCobject != null) {
+                if (TempRPCobject == null) {
                     Log.i("RecordButton","TempRPCobject=!Null");
                     if (!Recording) {
                         RecordButton.setText("מקליט");
                         Log.i("RecordButton","startRecording");
                         Recording = true;
                         RPClass TempRPCobject = new RPClass();
-                        TempRPCobject.SetFileName("1");
+                        TempRPCobject.SetFileName(getApplicationContext(),"1");
                         TempRPCobject.startRecording();
                     } else {
                         Log.i("RecordButton","stopRecording");
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         TempRPCobject.stopRecording();
                     }
                 }
+
             }
         });
 
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         PlayButton.setText("משמיע");
                         Log.i("PlayButton","startPlaying");
                         Playing = true;
-                        TempRPCobject.SetFileName("1");
+                        TempRPCobject.SetFileName(getApplication(),"1");
                         TempRPCobject.startPlaying();
                     } else {
                         PlayButton.setText("השמע");
@@ -107,11 +110,20 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode){
-            case REQUEST_RECORD_AUDIO_PERMISSION:
-                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                break;
+            case MY_PERMISSIONS_REQUEST:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
         }
-        if (!permissionToRecordAccepted ) finish();
 
     }
 }
