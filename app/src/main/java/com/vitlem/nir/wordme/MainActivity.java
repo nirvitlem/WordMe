@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
     private ArrayList<RPClass> arrayRPCobject = new ArrayList<RPClass>();
-    private RPClass TempRPCobject= null;
+    private  RPClass TempRPCobject= null;
     private boolean Recording = false ;
-    private boolean Playing = true ;
+    private boolean Playing = false ;
     public final int MY_PERMISSIONS_REQUEST=1;
 
 
@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("RecordButton","ClickRecordButton");
                 if (TempRPCobject == null) {
-                    Log.i("RecordButton","TempRPCobject=!Null");
+                    Log.i("RecordButton","TempRPCobject==Null");
                     if (!Recording) {
                         RecordButton.setText("מקליט");
                         Log.i("RecordButton","startRecording");
                         Recording = true;
-                        RPClass TempRPCobject = new RPClass();
+                        TempRPCobject = new RPClass();
                         TempRPCobject.SetFileName(getApplicationContext(),"1");
                         TempRPCobject.startRecording();
                     } else {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         PlayButton.setText("משמיע");
                         Log.i("PlayButton","startPlaying");
                         Playing = true;
-                        TempRPCobject.SetFileName(getApplication(),"1");
+                        TempRPCobject.SetFileName(getApplicationContext(),"1");
                         TempRPCobject.startPlaying();
                     } else {
                         PlayButton.setText("השמע");
