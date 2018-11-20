@@ -13,16 +13,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
-    private ArrayList<RPClass> arrayRPCobject = new ArrayList<RPClass>();
+    private ArrayList<String> arrayRPCobject = new ArrayList<String>();
     private  RPClass TempRPCobject= null;
     private boolean Recording = false ;
-    private boolean Playing = false ;
+
     public final int MY_PERMISSIONS_REQUEST=1;
+    private String TempFileName;
 
 
     @Override
@@ -44,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     Recording = true;
                     TempRPCobject = new RPClass();
-                    TempRPCobject.SetFileName(getApplicationContext(), "1.3gp");
+                    TempFileName = getFileName()+".3pg";
+                    TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
                     TempRPCobject.startRecording();
                 } else {
                     if (TempRPCobject != null) {
@@ -71,20 +74,25 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("PlayButton","ClickPlayButton");
                 if (TempRPCobject != null) {
                     Log.i("PlayButton","TempRPCobject=!Null");
-                    if (!Playing) {
-                        PlayButton.setText("משמיע");
-                        Log.i("PlayButton","startPlaying");
-                        Toast.makeText(MainActivity.this, "Recording Playing",
+                    if (TempFileName!="") {
+                        if (!TempRPCobject.Playing) {
+                            PlayButton.setText("משמיע");
+                            Log.i("PlayButton", "startPlaying");
+                            Toast.makeText(MainActivity.this, "Recording Playing",
+                                    Toast.LENGTH_LONG).show();
+                            TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
+                            TempRPCobject.startPlaying();
+                        } else {
+                            PlayButton.setText("השמע");
+                            Log.i("PlayButton", "startPlaying");
+                            TempRPCobject.stopPlaying();
+                        }
+                    }else
+                    {
+                        Toast.makeText(MainActivity.this, "Temp File Name is Empty, Record First",
                                 Toast.LENGTH_LONG).show();
-                        Playing = true;
-                        TempRPCobject.SetFileName(getApplicationContext(),"1.3gp");
-                        TempRPCobject.startPlaying();
-                    } else {
-                        PlayButton.setText("השמע");
-                        Log.i("PlayButton","startPlaying");
-                        Playing = false;
-                        TempRPCobject.stopPlaying();
                     }
+
                 }
             }
         });
@@ -95,25 +103,39 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("AddButton","ClickAddButtonn");
                 if (TempRPCobject != null) {
-                    Log.i("AddButton","TempRPCobject=!Null");
-                    arrayRPCobject.add(TempRPCobject);
+                    arrayRPCobject.add(TempRPCobject.GetFileName());
+                    Log.i("AddButton","TempRPCobject.GetFileName() " + TempRPCobject.GetFileName());
+                    TempRPCobject=null;
                 }
             }
         });
 
         final Button RunButton = findViewById(R.id.RunButton );
-        AddButton.setOnClickListener(new View.OnClickListener() {
+        RunButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("RunButton","ClickRunButton");
                 if (!arrayRPCobject.isEmpty() ) {
+                    Log.i("arrayRPCobject", "arrayRPCobjectisNotEmpty");
+
+                    RPClass rTempPalyingObject = new RPClass();
+                    rTempPalyingObject.tBet=5000;
+                    rTempPalyingObject.startPlaying(arrayRPCobject);
+
+
+                }
+                else
+                {
                     Log.i("arrayRPCobject","arrayRPCobjectisNotEmpty");
                 }
             }
         });
+    }
 
 
-
+    private String getFileName()
+    {
+        return String.valueOf(Calendar.getInstance().getTimeInMillis());
     }
 
     @Override
