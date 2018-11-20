@@ -9,6 +9,7 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RPClass {
     private static String mFileName = null;
@@ -74,6 +75,7 @@ public class RPClass {
         mPlayer = new MediaPlayer();
         final ArrayList<String> mFileNameArray = new ArrayList<String>();
         mFileNameArray.addAll(FileNameArray);
+        Collections.shuffle(mFileNameArray);
 
         try {
             Playing=true;
