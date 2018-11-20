@@ -70,15 +70,19 @@ public class RPClass {
         }
     }
 
-    public void startPlaying(final ArrayList<String> mFileNameArray) {
+    public void startPlaying(ArrayList<String> FileNameArray) {
         mPlayer = new MediaPlayer();
+        final ArrayList<String> mFileNameArray = new ArrayList<String>();
+        mFileNameArray.addAll(FileNameArray);
+
         try {
             Playing=true;
+
             mPlayer.setDataSource(mFileNameArray.get(0));
             Log.i("public void startPlaying(String mFileName) ", "Start Playing " + mFileNameArray.get(0) );
             mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mPlayer.prepare();
-            mPlayer.setVolume(100f, 100f);
+            mPlayer.setVolume(200f, 200f);
             mPlayer.start();
             mFileNameArray.remove(0);
             mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
