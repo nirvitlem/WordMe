@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final int MY_PERMISSIONS_REQUEST=1;
     private String TempFileName;
-
+    private Integer index= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         final Button PlayButton = findViewById(R.id.PlayButton );
         final Button AddButton = findViewById(R.id.AddButton );
         final Button RecordButton = findViewById(R.id.RecordButton);
+        final TextView tSum = findViewById(R.id.tSumWords);
 
 
         EditText et= (EditText)findViewById(R.id.tBet);
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        tSum.setText( " מספר המילים "+index  );
 
         RecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("PlayButton","TempRPCobject=!Null");
                     if (TempFileName!="") {
                         if (!TempRPCobject.Playing) {
-                            RecordButton.setEnabled(false);
-                            RunButton.setEnabled(false);
-                            AddButton.setEnabled(false);
                             PlayButton.setText("משמיע");
                             Log.i("PlayButton", "startPlaying");
                             Toast.makeText(MainActivity.this, "Recording Playing",
@@ -109,9 +109,6 @@ public class MainActivity extends AppCompatActivity {
                             TempRPCobject.startPlaying();
                         } else {
                             PlayButton.setText("השמע");
-                            RecordButton.setEnabled(true);
-                            RunButton.setEnabled(true);
-                            AddButton.setEnabled(true);
                             Log.i("PlayButton", "startPlaying");
                             TempRPCobject.stopPlaying();
                         }
@@ -132,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("AddButton","ClickAddButtonn");
                 if (TempRPCobject != null) {
                     arrayRPCobject.add(TempRPCobject.GetFileName());
+                    Toast.makeText(MainActivity.this, "Add new File",
+                            Toast.LENGTH_LONG).show();
+                    index++;
+                    tSum.setText( " מספר המילים "+index  );
                     Log.i("AddButton","TempRPCobject.GetFileName() " + TempRPCobject.GetFileName());
                     TempRPCobject=null;
                 }

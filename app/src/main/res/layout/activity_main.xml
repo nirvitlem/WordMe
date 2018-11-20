@@ -69,4 +69,18 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="זמן המתנה בן מילים" />
+
+    <TextView
+        android:id="@+id/tSumWords"
+        android:layout_width="214dp"
+        android:layout_height="28dp"
+        android:layout_alignEnd="@+id/tBet"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="153dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="330dp"
+        android:textDirection="rtl" />
 </RelativeLayout>
