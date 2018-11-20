@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,25 +36,32 @@ public class MainActivity extends AppCompatActivity {
         RecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("RecordButton","ClickRecordButton");
-                if (TempRPCobject == null) {
-                    Log.i("RecordButton","TempRPCobject==Null");
-                    if (!Recording) {
-                        RecordButton.setText("מקליט");
-                        Log.i("RecordButton","startRecording");
-                        Recording = true;
-                        TempRPCobject = new RPClass();
-                        TempRPCobject.SetFileName(getApplicationContext(),"1");
-                        TempRPCobject.startRecording();
-                    } else {
-                        Log.i("RecordButton","stopRecording");
+                Log.i("RecordButton", "ClickRecordButton");
+                if (!Recording) {
+                    RecordButton.setText("מקליט");
+                    Log.i("RecordButton", "startRecording");
+                    Toast.makeText(MainActivity.this, "Recording started",
+                            Toast.LENGTH_LONG).show();
+                    Recording = true;
+                    TempRPCobject = new RPClass();
+                    TempRPCobject.SetFileName(getApplicationContext(), "1.3gp");
+                    TempRPCobject.startRecording();
+                } else {
+                    if (TempRPCobject != null) {
+                        Log.i("RecordButton", "TempRPCobject!=Null");
+                        Log.i("RecordButton", "stopRecording");
+                        Toast.makeText(MainActivity.this, "Recording Completed",
+                                Toast.LENGTH_LONG).show();
                         RecordButton.setText("הקלט");
                         Recording = false;
                         TempRPCobject.stopRecording();
+                    } else {
+                        Log.i("RecordButton", "Stop Record TempRPCobject==Null");
                     }
                 }
-
             }
+
+
         });
 
         final Button PlayButton = findViewById(R.id.PlayButton );
@@ -66,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     if (!Playing) {
                         PlayButton.setText("משמיע");
                         Log.i("PlayButton","startPlaying");
+                        Toast.makeText(MainActivity.this, "Recording Playing",
+                                Toast.LENGTH_LONG).show();
                         Playing = true;
-                        TempRPCobject.SetFileName(getApplicationContext(),"1");
+                        TempRPCobject.SetFileName(getApplicationContext(),"1.3gp");
                         TempRPCobject.startPlaying();
                     } else {
                         PlayButton.setText("השמע");

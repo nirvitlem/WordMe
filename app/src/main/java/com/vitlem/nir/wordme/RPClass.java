@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -18,7 +17,7 @@ public class RPClass {
 
     public void SetFileName(Context c,String f)
     {
-        //String mFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) +File.separator+ f; //
+        //mFileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) +File.separator+ f; //
         mFileName =  c.getFilesDir().getPath().toString() + File.separator +  f;
         Log.i("mFileName",mFileName);
     }
@@ -61,8 +60,8 @@ public class RPClass {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mRecorder.setOutputFile(mFileName);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mRecorder.setOutputFile(mFileName);
 
         try {
             mRecorder.prepare();
