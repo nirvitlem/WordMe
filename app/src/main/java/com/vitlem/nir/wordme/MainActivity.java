@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Add new File",
                             Toast.LENGTH_LONG).show();
                     index++;
-                    tSum.setText( " Number of words "+index  );
+                    tSum.setText( index  );
                     Log.i("AddButton","TempRPCobject.GetFileName() " + TempRPCobject.GetFileName());
                     TempRPCobject=null;
                 }
