@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tSum.setText( " מספר המילים "+index  );
+        tSum.setText( " Number of words " +index  );
 
         RecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("RecordButton", "ClickRecordButton");
                 if (!Recording) {
-                    RecordButton.setText("עצור הקלטה");
+                    RecordButton.setText("Stop Recording");
                     RunButton.setEnabled(false);
                     PlayButton.setEnabled(false);
                     AddButton.setEnabled(false);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("RecordButton", "stopRecording");
                         Toast.makeText(MainActivity.this, "Recording Completed",
                                 Toast.LENGTH_LONG).show();
-                        RecordButton.setText("הקלט");
+                        RecordButton.setText("Record");
                         RunButton.setEnabled(true);
                         PlayButton.setEnabled(true);
                         AddButton.setEnabled(true);
@@ -101,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("PlayButton","TempRPCobject=!Null");
                     if (TempFileName!="") {
                         if (!TempRPCobject.Playing) {
-                            PlayButton.setText("משמיע");
+                            PlayButton.setText("Playing");
                             Log.i("PlayButton", "startPlaying");
                             Toast.makeText(MainActivity.this, "Recording Playing",
                                     Toast.LENGTH_LONG).show();
                             TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
                             TempRPCobject.startPlaying();
                         } else {
-                            PlayButton.setText("השמע");
+                            PlayButton.setText("Play");
                             Log.i("PlayButton", "startPlaying");
                             TempRPCobject.stopPlaying();
                         }
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Add new File",
                             Toast.LENGTH_LONG).show();
                     index++;
-                    tSum.setText( " מספר המילים "+index  );
+                    tSum.setText( " Number of words "+index  );
                     Log.i("AddButton","TempRPCobject.GetFileName() " + TempRPCobject.GetFileName());
                     TempRPCobject=null;
                 }
