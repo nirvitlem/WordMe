@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("PlayButton","TempRPCobject=!Null");
                     if (TempFileName!="") {
                         if (!TempRPCobject.Playing) {
-                            PlayButton.setText("Playing");
+                            PlayButton.setText("Play");
                             Log.i("PlayButton", "startPlaying");
                             Toast.makeText(MainActivity.this, "Recording Playing",
                                     Toast.LENGTH_LONG).show();

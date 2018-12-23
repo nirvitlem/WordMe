@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textDirection="ltr"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/AddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="260dp"
-        android:layout_marginTop="79dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="74dp"
+        android:layout_marginEnd="40dp"
         android:text="Add" />
 
     <Button
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="74dp"
         android:text="Play" />
 
     <Button
@@ -45,10 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="252dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="74dp"
         android:text="Record" />
 
     <EditText
@@ -58,9 +57,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="89dp"
-        android:layout_marginTop="259dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginEnd="86dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="TBW in seconds" />
@@ -72,20 +71,21 @@
         android:layout_alignEnd="@+id/tBet"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="-21dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginTop="171dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="299dp"
         android:textDirection="rtl" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="114dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/PlayButton"
-        android:layout_alignEnd="@+id/tBet"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="125dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Word count" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="129dp"
+        android:layout_height="37dp"
+        android:layout_alignTop="@+id/tSumWords"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="203dp"
+        android:layout_marginTop="0dp"
+        android:text="Words count"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
 </RelativeLayout>
