@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tSum.setText( " Number of words " +index  );
+        tSum.setText(  +index  );
 
         RecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
