@@ -92,7 +92,9 @@ public class SimpleFileDialog
 
         try
         {
-            m_sdcardDirectory = new File(m_sdcardDirectory).getCanonicalPath();
+            m_sdcardDirectory = new File(context.getFilesDir().getAbsolutePath()
+                    + File.separator + "serlization").getCanonicalPath();
+           // m_sdcardDirectory = new File(m_sdcardDirectory).getCanonicalPath();
         }
         catch (IOException ioe)
         {

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         final Button AddButton = findViewById(R.id.AddButton );
         final Button RecordButton = findViewById(R.id.RecordButton);
         final Button SaveButton = findViewById(R.id.SaveButton);
-        final Button LoaddButton = findViewById(R.id.LoadButton);
+        final Button LoadButton = findViewById(R.id.LoadButton);
         final TextView tSum = findViewById(R.id.tSumWords);
 
 
@@ -199,26 +199,25 @@ public class MainActivity extends AppCompatActivity {
                                     m_chosen = chosenDir;
                                     Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
                                             m_chosen, Toast.LENGTH_LONG).show();
-                                    write(getApplicationContext(), arrayRPCobject);
+                                    write(getApplicationContext(), arrayRPCobject,m_chosen);
                                 }
                             });
 
                     //You can change the default filename using the public variable "Default_File_Name"
-                    FileSaveDialog.Default_File_Name = "my_default.txt";
+                    FileSaveDialog.Default_File_Name = "mylist";
                     FileSaveDialog.chooseFile_or_Dir();
-
-
-
 
                 }
                 else
                 {
+                    Toast.makeText(MainActivity.this, "No Actice List To Save " +
+                            m_chosen, Toast.LENGTH_LONG).show();
                     Log.i("Saved","arrayRPCobject is  empty");
                 }
             }
         });
 
-        LoaddButton.setOnClickListener(new View.OnClickListener() {
+        LoadButton.setOnClickListener(new View.OnClickListener() {
             String m_chosen;
             @Override
             public void onClick(View view) {
@@ -234,11 +233,17 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
                                         m_chosen, Toast.LENGTH_LONG).show();
                                 Log.i("LoaddButton","ClickLoaddButton " + m_chosen);
-                             if (m_chosen!="") {
-                                 arrayRPCobject.clear();
-                                 arrayRPCobject = read(getApplicationContext(), m_chosen);
-                                 tSum.setText(String.valueOf(arrayRPCobject.size()));
-                             }
+                                try {
+                                    if (m_chosen != "") {
+                                        arrayRPCobject.clear();
+                                        arrayRPCobject = read(getApplicationContext(), m_chosen);
+                                        tSum.setText(String.valueOf(arrayRPCobject.size()));
+                                    }
+                                }catch(Exception e)
+                                {
+                                    Toast.makeText(MainActivity.this, "File Error " +
+                                            m_chosen, Toast.LENGTH_LONG).show();
+                                }
                             }
                         });
 
@@ -284,19 +289,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static void write(Context context, Object nameOfClassGetterSetter) {
+    public static void write(Context context, Object nameOfClassGetterSetter,String fName) {
         File directory = new File(context.getFilesDir().getAbsolutePath()
                 + File.separator + "serlization");
         if (!directory.exists()) {
             directory.mkdirs();
         }
 
-        String filename = "Mylist.srl";
+        String filename = fName;
         ObjectOutput out = null;
 
         try {
-            out = new ObjectOutputStream(new FileOutputStream(directory
-                    + File.separator + filename));
+            out= new ObjectOutputStream(new FileOutputStream(filename + ".slr"));
+           // out = new ObjectOutputStream(new FileOutputStream(directory
+            //        + File.separator + filename));
             out.writeObject(nameOfClassGetterSetter);
             out.close();
         } catch (FileNotFoundException e) {
@@ -311,12 +317,15 @@ public class MainActivity extends AppCompatActivity {
         ObjectInputStream input = null;
         ArrayList<String> ReturnClass = null;
         String filename = fName;
-        File directory = new File(context.getFilesDir().getAbsolutePath()
-                + File.separator + "serlization");
+        //File directory = new File(context.getFilesDir().getAbsolutePath()
+        //
+        //
+        //       + File.separator + "serlization");
         try {
 
-            input = new ObjectInputStream(new FileInputStream(directory
-                    + File.separator + filename));
+            input = new ObjectInputStream(new FileInputStream(fName));
+           // input = new ObjectInputStream(new FileInputStream(directory
+            //        + File.separator + filename));
             ReturnClass = (ArrayList<String>) input.readObject();
             input.close();
 
