@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                                     m_chosen = chosenDir;
                                     Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
                                             m_chosen, Toast.LENGTH_LONG).show();
+                                    write(getApplicationContext(), arrayRPCobject);
                                 }
                             });
 
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    write(getApplicationContext(), arrayRPCobject);
+
                 }
                 else
                 {
@@ -221,11 +222,7 @@ public class MainActivity extends AppCompatActivity {
             String m_chosen;
             @Override
             public void onClick(View view) {
-                File directory = new File(getApplicationContext().getFilesDir().getAbsolutePath()
-                        + File.separator + "serlization");
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
+
                 SimpleFileDialog FileOpenDialog =  new SimpleFileDialog(MainActivity.this, "FileOpen",
                         new SimpleFileDialog.SimpleFileDialogListener()
                         {
@@ -236,12 +233,17 @@ public class MainActivity extends AppCompatActivity {
                                 m_chosen = chosenDir;
                                 Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
                                         m_chosen, Toast.LENGTH_LONG).show();
+                                Log.i("LoaddButton","ClickLoaddButton " + m_chosen);
+                             if (m_chosen!="") {
+                                 arrayRPCobject.clear();
+                                 arrayRPCobject = read(getApplicationContext(), m_chosen);
+                                 tSum.setText(String.valueOf(arrayRPCobject.size()));
+                             }
                             }
                         });
 
                 //You can change the default filename using the public variable "Default_File_Name"
                 FileOpenDialog.Default_File_Name = "";
-
                 FileOpenDialog.chooseFile_or_Dir(getApplicationContext().getFilesDir().getAbsolutePath()
                         + File.separator + "serlization");
 
@@ -249,12 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                Log.i("LoaddButton","ClickLoaddButton");
-              /* if (m_chosen!="") {
-                    arrayRPCobject.clear();
-                    arrayRPCobject = read(getApplicationContext(), m_chosen);
-                    tSum.setText(String.valueOf(arrayRPCobject.size()));
-                } */
+
 
             }
         });
