@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:background="@android:color/holo_blue_light"
     android:textDirection="ltr"
     tools:context=".MainActivity">
 
@@ -11,101 +13,101 @@
         android:id="@+id/AddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="74dp"
-        android:layout_marginEnd="258dp"
-        android:text="Add" />
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:text="Add"
+        app:layout_constraintStart_toEndOf="@+id/PlayButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/RunButton"
         android:layout_width="291dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentBottom="false"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="267dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="191dp"
-        android:text="Shuffle and Play" />
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="228dp"
+        android:text="Shuffle and Play"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/PlayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="74dp"
-        android:text="Play" />
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="48dp"
+        android:text="Play"
+        app:layout_constraintStart_toEndOf="@+id/RecordButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/RecordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="266dp"
-        android:layout_marginTop="74dp"
-        android:text="Record" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:text="Record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/tBet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="203dp"
-        android:layout_marginEnd="86dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="TBW in seconds" />
+        android:text="TBW in seconds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PlayButton" />
 
     <TextView
         android:id="@+id/tSumWords"
         android:layout_width="126dp"
         android:layout_height="41dp"
-        android:layout_alignEnd="@+id/tBet"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="142dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginBottom="328dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="60dp"
         android:textDirection="rtl"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="152dp"
         android:layout_height="41dp"
-        android:layout_alignTop="@+id/tSumWords"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="194dp"
-        android:layout_marginTop="-1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="8dp"
         android:text="Words count"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tSumWords"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/SaveButton"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/RunButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="135dp"
-        android:text="Save List" />
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
+        android:text="Save List"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RunButton" />
 
     <Button
         android:id="@+id/LoadButton"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/RecordButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="-218dp"
-        android:layout_marginBottom="75dp"
-        android:text="Load List" />
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="20dp"
+        android:text="Load List"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SaveButton" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         final Button PlayButton = findViewById(R.id.PlayButton );
         final Button AddButton = findViewById(R.id.AddButton );
         final Button RecordButton = findViewById(R.id.RecordButton);
+        final Button SaveButton = findViewById(R.id.SaveButton);
+        final Button LoaddButton = findViewById(R.id.LoadButton);
         final TextView tSum = findViewById(R.id.tSumWords);
 
 
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("RecordButton", "ClickRecordButton");
                 if (!Recording) {
-                    RecordButton.setText("Stop Recording");
+                    RecordButton.setText("Recording");
                     RunButton.setEnabled(false);
                     PlayButton.setEnabled(false);
                     AddButton.setEnabled(false);
@@ -101,15 +103,16 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("PlayButton","TempRPCobject=!Null");
                     if (TempFileName!="") {
                         if (!TempRPCobject.Playing) {
-                            PlayButton.setText("Play");
+                            PlayButton.setText("Playing");
                             Log.i("PlayButton", "startPlaying");
                             Toast.makeText(MainActivity.this, "Recording Playing",
                                     Toast.LENGTH_LONG).show();
                             TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
                             TempRPCobject.startPlaying();
-                        } else {
                             PlayButton.setText("Play");
-                            Log.i("PlayButton", "startPlaying");
+                        } else {
+                           // PlayButton.setText("Play");
+                           // Log.i("PlayButton", "startPlaying");
                             TempRPCobject.stopPlaying();
                         }
                     }else
@@ -165,6 +168,22 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Array File Name is Empty, Record First",
                             Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        SaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("SaveButton","ClickSaveButton");
+
+            }
+        });
+
+        LoaddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("LoaddButton","ClickLoaddButton");
+
             }
         });
     }
