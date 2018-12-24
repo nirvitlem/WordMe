@@ -1,6 +1,7 @@
 package com.vitlem.nir.wordme;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +15,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -172,17 +182,79 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SaveButton.setOnClickListener(new View.OnClickListener() {
+            String m_chosen;
             @Override
             public void onClick(View view) {
                 Log.i("SaveButton","ClickSaveButton");
+                if (!arrayRPCobject.isEmpty()) {
+                    Log.i("Saved","arrayRPCobject is not empty");
 
+                    SimpleFileDialog FileSaveDialog =  new SimpleFileDialog(MainActivity.this, "FileSave",
+                            new SimpleFileDialog.SimpleFileDialogListener()
+                            {
+                                @Override
+                                public void onChosenDir(String chosenDir)
+                                {
+                                    // The code in this function will be executed when the dialog OK button is pushed
+                                    m_chosen = chosenDir;
+                                    Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
+                                            m_chosen, Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                    //You can change the default filename using the public variable "Default_File_Name"
+                    FileSaveDialog.Default_File_Name = "my_default.txt";
+                    FileSaveDialog.chooseFile_or_Dir();
+
+
+
+                    write(getApplicationContext(), arrayRPCobject);
+                }
+                else
+                {
+                    Log.i("Saved","arrayRPCobject is  empty");
+                }
             }
         });
 
         LoaddButton.setOnClickListener(new View.OnClickListener() {
+            String m_chosen;
             @Override
             public void onClick(View view) {
+                File directory = new File(getApplicationContext().getFilesDir().getAbsolutePath()
+                        + File.separator + "serlization");
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                SimpleFileDialog FileOpenDialog =  new SimpleFileDialog(MainActivity.this, "FileOpen",
+                        new SimpleFileDialog.SimpleFileDialogListener()
+                        {
+                            @Override
+                            public void onChosenDir(String chosenDir)
+                            {
+                                // The code in this function will be executed when the dialog OK button is pushed
+                                m_chosen = chosenDir;
+                                Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
+                                        m_chosen, Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                //You can change the default filename using the public variable "Default_File_Name"
+                FileOpenDialog.Default_File_Name = "";
+
+                FileOpenDialog.chooseFile_or_Dir(getApplicationContext().getFilesDir().getAbsolutePath()
+                        + File.separator + "serlization");
+
+
+
+
+
                 Log.i("LoaddButton","ClickLoaddButton");
+              /* if (m_chosen!="") {
+                    arrayRPCobject.clear();
+                    arrayRPCobject = read(getApplicationContext(), m_chosen);
+                    tSum.setText(String.valueOf(arrayRPCobject.size()));
+                } */
 
             }
         });
@@ -214,4 +286,54 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public static void write(Context context, Object nameOfClassGetterSetter) {
+        File directory = new File(context.getFilesDir().getAbsolutePath()
+                + File.separator + "serlization");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String filename = "Mylist.srl";
+        ObjectOutput out = null;
+
+        try {
+            out = new ObjectOutputStream(new FileOutputStream(directory
+                    + File.separator + filename));
+            out.writeObject(nameOfClassGetterSetter);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> read(Context context,String fName) {
+
+        ObjectInputStream input = null;
+        ArrayList<String> ReturnClass = null;
+        String filename = fName;
+        File directory = new File(context.getFilesDir().getAbsolutePath()
+                + File.separator + "serlization");
+        try {
+
+            input = new ObjectInputStream(new FileInputStream(directory
+                    + File.separator + filename));
+            ReturnClass = (ArrayList<String>) input.readObject();
+            input.close();
+
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ReturnClass;
+    }
+
+
 }
