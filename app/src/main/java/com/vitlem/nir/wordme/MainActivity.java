@@ -2,12 +2,19 @@ package com.vitlem.nir.wordme;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +33,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,16 +43,21 @@ public class MainActivity extends AppCompatActivity {
     private  RPClass TempRPCobject= null;
     private boolean Recording = false ;
 
+
     public final int MY_PERMISSIONS_REQUEST=1;
     private String TempFileName;
     private Integer index= 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST);
+        ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
+        linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
         final Button RunButton = findViewById(R.id.RunButton );
         final Button PlayButton = findViewById(R.id.PlayButton );
@@ -100,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
-
         });
 
 
@@ -340,6 +351,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return ReturnClass;
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+
+    }
 
 }
