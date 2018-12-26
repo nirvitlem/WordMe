@@ -11,6 +11,22 @@
     android:textDirection="ltr"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="152dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="left"
+        android:text="TBW in seconds"
+        android:textAlignment="gravity"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tBet"
+        app:layout_constraintHorizontal_bias="0.647"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/AddButton"
         android:layout_width="wrap_content"
@@ -61,25 +77,22 @@
 
     <EditText
         android:id="@+id/tBet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="128dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="64dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="TBW in seconds"
+        android:text="10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PlayButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tSumWords"
-        android:layout_width="126dp"
+        android:layout_width="128dp"
         android:layout_height="41dp"
         android:layout_marginTop="176dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="64dp"
         android:textDirection="rtl"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +110,7 @@
         android:textAlignment="gravity"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/tSumWords"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
