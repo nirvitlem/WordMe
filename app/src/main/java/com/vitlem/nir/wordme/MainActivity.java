@@ -52,12 +52,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        Resources res = getApplicationContext().getResources();
+
+        Locale locale = new Locale("en","US");
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+
+        res.updateConfiguration(config, res.getDisplayMetrics());
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST);
         ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
-        linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         final Button RunButton = findViewById(R.id.RunButton );
         final Button PlayButton = findViewById(R.id.PlayButton );
