@@ -34,6 +34,10 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Resources res = getApplicationContext().getResources();
 
+        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
+       // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+
+
         Locale locale = new Locale("en","US");
         Locale.setDefault(locale);
 
@@ -63,6 +72,17 @@ public class MainActivity extends AppCompatActivity {
         res.updateConfiguration(config, res.getDisplayMetrics());
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, "ca-app-pub-3373354348631607~9109325808");
+        AdView mAdView = findViewById(R.id.adViewUP);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mAdView = findViewById(R.id.adViewDown);
+        adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST);
         ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
         linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
