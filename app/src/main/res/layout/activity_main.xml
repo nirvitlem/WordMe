@@ -9,6 +9,7 @@
     android:background="@android:color/holo_blue_light"
     android:layoutDirection="ltr"
     android:textDirection="ltr"
+    app:barrierAllowsGoneWidgets="false"
     tools:context=".MainActivity">
 
     <TextView
@@ -119,7 +120,6 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="28dp"
         android:drawableLeft="@drawable/icons8download24"
         android:text="Save List"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +130,6 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="28dp"
         android:drawableLeft="@drawable/icons8upload24"
         android:text="Load List"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,11 +142,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3373354348631607/4591496293"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3373354348631607/4591496293"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adViewUP"
@@ -156,10 +155,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3373354348631607/4427844763"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3373354348631607/4427844763"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bHelp"
+        android:layout_width="65dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/holo_blue_light"
+        android:drawableLeft="@drawable/icons8help48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="420dp" />
 
 </android.support.constraint.ConstraintLayout>

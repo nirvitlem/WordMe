@@ -1,26 +1,27 @@
 package com.vitlem.nir.wordme;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,10 +35,8 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+
+//import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         final Button RecordButton = findViewById(R.id.RecordButton);
         final Button SaveButton = findViewById(R.id.SaveButton);
         final Button LoadButton = findViewById(R.id.LoadButton);
+        final Button hButton = findViewById(R.id.bHelp);
         final TextView tSum = findViewById(R.id.tSumWords);
 
 
@@ -191,6 +191,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        hButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("hButton","ClickhButtonn");
+                showAddItemDialog(MainActivity.this);
+            }
+        });
 
         RunButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,6 +392,31 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
 
+    }
+
+    private void showAddItemDialog(Context c) {
+        final EditText taskEditText = new EditText(c);
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("How To Use?")
+                .setMessage("1) Press RECORD and say one word to the microphone.\n" +
+                        "2) Press RECORDING when you finish.\n" +
+                "3) Press PLAY if you want to hear your last word.\n" +
+                "4) Press ADD to add the last word you record to the list.\n" +
+                "5) After you finish recording all the words press SHUFFLE AND PLAY the words.\n" +
+                " * You can save your list by pressing SAVE.\n" +
+                " * You can load saved list by pressing LOAD.\n\n" +
+                 "***Enjoy and Good Luck***")
+
+               // .setView(taskEditText)
+              /*  .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String task = String.valueOf(taskEditText.getText());
+                    }
+                })*/
+                .setNegativeButton("Close", null)
+                .create();
+        dialog.show();
     }
 
 }
