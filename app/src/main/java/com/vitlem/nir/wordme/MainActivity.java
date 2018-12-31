@@ -402,7 +402,7 @@ public class MainActivity extends AppCompatActivity {
                         "2) Press RECORDING when you finish.\n" +
                 "3) Press PLAY if you want to hear your last word.\n" +
                 "4) Press ADD to add the last word you record to the list.\n" +
-                "5) After you finish recording all the words press SHUFFLE AND PLAY the words.\n" +
+                "5) After you finish recording all the words press SHUFFLE AND PLAY to hear the words.\n" +
                 " * You can save your list by pressing SAVE.\n" +
                 " * You can load saved list by pressing LOAD.\n\n" +
                  "***Enjoy and Good Luck***")
