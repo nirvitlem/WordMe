@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET},MY_PERMISSIONS_REQUEST);
+        ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
+        linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
         MobileAds.initialize(this, "ca-app-pub-3373354348631607~9109325808");
         AdView mAdView = findViewById(R.id.adViewUP);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -81,10 +86,6 @@ public class MainActivity extends AppCompatActivity {
         adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST);
-        ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
-        linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         final Button RunButton = findViewById(R.id.RunButton );
         final Button PlayButton = findViewById(R.id.PlayButton );
