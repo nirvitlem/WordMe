@@ -62,20 +62,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Locale locale = new Locale("en","US");
-        Locale.setDefault(locale);
+        //Locale locale = new Locale("en","US");
+        //Locale.setDefault(locale);
 
-        Configuration config = new Configuration();
-        config.locale = locale;
+       // Configuration config = new Configuration();
+        //config.locale = locale;
 
-        res.updateConfiguration(config, res.getDisplayMetrics());
+      //  res.updateConfiguration(config, res.getDisplayMetrics());
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET},MY_PERMISSIONS_REQUEST);
-        ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
-        linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        //ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
+        //linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         MobileAds.initialize(this, "ca-app-pub-3373354348631607~9109325808");
         AdView mAdView = findViewById(R.id.adViewUP);
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("RecordButton", "ClickRecordButton");
                 if (!Recording) {
-                    RecordButton.setText("Recording");
+                    RecordButton.setText(R.string.RecordingText);
                     RunButton.setEnabled(false);
                     PlayButton.setEnabled(false);
                     AddButton.setEnabled(false);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("RecordButton", "stopRecording");
                         Toast.makeText(MainActivity.this, "Recording Completed",
                                 Toast.LENGTH_LONG).show();
-                        RecordButton.setText("Record");
+                        RecordButton.setText(R.string.RecordText);
                         RunButton.setEnabled(true);
                         PlayButton.setEnabled(true);
                         AddButton.setEnabled(true);

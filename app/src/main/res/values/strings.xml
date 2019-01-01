@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Word2Me</string>
+    <string name="RecordText">Record</string>
+    <string name="RecordingText">Recording</string>
+    <string name="PlayText">Play</string>
+    <string name="AddText">Add</string>
+    <string name="SaveText">Save List</string>
+    <string name="LoadText">Load List</string>
+    <string name="ShuffeText">Shuffle And Play</string>
+    <string name="WordCountText">Word Count</string>
+    <string name="SBWText">Seconds between words</string>
 </resources>

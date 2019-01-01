@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">הקראת מילים להכתבה</string>
+    <string name="RecordText">הקלט</string>
+    <string name="RecordingText">מקליט</string>
+    <string name="PlayText">השמע</string>
+    <string name="AddText">הוסף</string>
+    <string name="SaveText">שמור רשימה</string>
+    <string name="LoadText">טען רשימה</string>
+    <string name="ShuffeText">ערבב והשמע</string>
+    <string name="WordCountText">מספר מילים</string>
+    <string name="SBWText">זמן בן מילים</string>
+</resources>
