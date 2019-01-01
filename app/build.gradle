@@ -4,8 +4,8 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId 'com.Vitlem.nir.wordme'
-        minSdkVersion 24
-        targetSdkVersion 28
+        minSdkVersion 25
+        targetSdkVersion 25
         versionCode 3
         versionName "1.02"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,6 +21,7 @@ android {
     }
     productFlavors {
     }
+    buildToolsVersion '28.0.3'
 }
 
 allprojects {
