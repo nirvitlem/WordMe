@@ -33,7 +33,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="96dp"
         android:drawableLeft="@drawable/icons8plus24"
-        android:text="Add"
+        android:text="@string/AddText"
         app:layout_constraintStart_toEndOf="@+id/PlayButton"
         app:layout_constraintTop_toTopOf="parent" />
 
