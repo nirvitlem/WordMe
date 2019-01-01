@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">הקראת מילים להכתבה</string>
-    <string name="RecordText">הקלט</string>
-    <string name="RecordingText">מקליט</string>
-    <string name="PlayText">השמע</string>
-    <string name="AddText">הוסף</string>
-    <string name="SaveText">שמור רשימה</string>
-    <string name="LoadText">טען רשימה</string>
-    <string name="ShuffeText">ערבב והשמע</string>
-    <string name="WordCountText">מספר מילים</string>
-    <string name="SBWText">זמן בן מילים</string>
     <string name="HelpWindow">אך להשתמש?</string>
     <string name="HelpText">לחצי\\ץ על הקלטה ואמור את המילה למיקרופון, בסיום לחץ שוב על כפתור ההקלטה. לחצי\\ץ על הוסף כדי להוסיף את המילה לרשימה. לחצי\\ץ על ערבב והשמע כדי לשמוע את המילים שהוקלטו. יש אפשרות לשמור את רשימת המילים לשימוש מאוחר יותר וזאת על ידי לחיצה על כפתור שמור.ניתן לטעון רשימה ישנה בלחיצה על כפתור טען.כפתור השמע מאפשר השמעת המילה לפני הוספת לרשימה.</string>
 </resources>
