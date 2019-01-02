@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">הקראת מילים להכתבה</string>
     <string name="RecordText">הקלט</string>
-    <string name="RecordingText">מקליט</string>
+    <string name="RecordingText">עצור</string>
     <string name="PlayText">השמע</string>
     <string name="AddText">הוסף</string>
     <string name="SaveText">שמור רשימה</string>

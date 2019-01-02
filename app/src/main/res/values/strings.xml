@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Word2Me</string>
     <string name="RecordText">Record</string>
-    <string name="RecordingText">Recording</string>
+    <string name="RecordingText">Stop</string>
     <string name="PlayText">Play</string>
     <string name="AddText">Add</string>
     <string name="SaveText">Save List</string>
@@ -10,5 +10,5 @@
     <string name="WordCountText">Word Count</string>
     <string name="SBWText">Seconds between words</string>
     <string name="HelpWindow">How To Use?</string>
-    <string name="HelpText">"1) Press RECORD and say one word to the microphone.\n2) Press RECORDING when you finish.\n3) Press PLAY if you want to hear your last word.\n4) Press ADD to add the last word you record to the list.\n5) After you finish recording all the words press SHUFFLE AND PLAY to hear the words.\n * You can save your list by pressing SAVE.\n * You can load saved list by pressing LOAD.\n\n ***Enjoy and Good Luck***"</string>
+    <string name="HelpText">"1) Press RECORD and say one word to the microphone.\n2) Press STOP when you finish.\n3) Press PLAY if you want to hear your last word.\n4) Press ADD to add the last word you record to the list.\n5) After you finish recording all the words press SHUFFLE AND PLAY to hear the words.\n * You can save your list by pressing SAVE.\n * You can load saved list by pressing LOAD.\n\n ***Enjoy and Good Luck***"</string>
 </resources>
