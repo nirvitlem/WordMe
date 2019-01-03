@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     PlayButton.setEnabled(false);
                     AddButton.setEnabled(false);
                     Log.i("RecordButton", "startRecording");
-                    Toast.makeText(MainActivity.this, "Recording started",
+                    Toast.makeText(MainActivity.this, R.string.Recordingstarted,
                             Toast.LENGTH_LONG).show();
                     Recording = true;
                     TempRPCobject = new RPClass();
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     if (TempRPCobject != null) {
                         Log.i("RecordButton", "TempRPCobject!=Null");
                         Log.i("RecordButton", "stopRecording");
-                        Toast.makeText(MainActivity.this, "Recording Completed",
+                        Toast.makeText(MainActivity.this, R.string.RecordingCompleted,
                                 Toast.LENGTH_LONG).show();
                         RecordButton.setText(R.string.RecordText);
                         RunButton.setEnabled(true);
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         if (!TempRPCobject.Playing) {
                             PlayButton.setText("Playing");
                             Log.i("PlayButton", "startPlaying");
-                            Toast.makeText(MainActivity.this, "Recording Playing",
+                            Toast.makeText(MainActivity.this, R.string.RecordingPlaying,
                                     Toast.LENGTH_LONG).show();
                             TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
                             TempRPCobject.startPlaying();
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }else
                     {
-                        Toast.makeText(MainActivity.this, "Temp File Name is Empty, Record First",
+                        Toast.makeText(MainActivity.this, R.string.Playtemp,
                                 Toast.LENGTH_LONG).show();
                     }
 
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("AddButton","ClickAddButtonn");
                 if (TempRPCobject != null) {
                     arrayRPCobject.add(TempRPCobject.GetFileName());
-                    Toast.makeText(MainActivity.this, "Add new File",
+                    Toast.makeText(MainActivity.this, R.string.AddnewFile,
                             Toast.LENGTH_LONG).show();
                     index++;
                     tSum.setText(  String.valueOf(index)  );
@@ -204,27 +205,28 @@ public class MainActivity extends AppCompatActivity {
         RunButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("RunButton","ClickRunButton");
-                if (!arrayRPCobject.isEmpty() ) {
-                    Log.i("arrayRPCobject", "arrayRPCobjectisNotEmpty");
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist,Toast.LENGTH_LONG).show();
+                } else {
+                    Log.i("RunButton", "ClickRunButton");
+                    if (!arrayRPCobject.isEmpty()) {
+                        Log.i("arrayRPCobject", "arrayRPCobjectisNotEmpty");
 
-                    RPClass rTempPalyingObject = new RPClass();
-                    TextView tv= findViewById(R.id.tBet);
-                    try {
-                        rTempPalyingObject.tBet = Integer.valueOf(tv.getText().toString())*1000;
-                    }catch(Exception e)
-                    {
-                        rTempPalyingObject.tBet=10000;
+                        RPClass rTempPalyingObject = new RPClass();
+                        TextView tv = findViewById(R.id.tBet);
+                        try {
+                            rTempPalyingObject.tBet = Integer.valueOf(tv.getText().toString()) * 1000;
+                        } catch (Exception e) {
+                            rTempPalyingObject.tBet = 10000;
+                        }
+                        rTempPalyingObject.startPlaying(arrayRPCobject);
+
+
+                    } else {
+                        Log.i("arrayRPCobject", "arrayRPCobjectisEmpty");
+                        Toast.makeText(MainActivity.this, R.string.arrayisempty,
+                                Toast.LENGTH_LONG).show();
                     }
-                    rTempPalyingObject.startPlaying(arrayRPCobject);
-
-
-                }
-                else
-                {
-                    Log.i("arrayRPCobject","arrayRPCobjectisEmpty");
-                    Toast.makeText(MainActivity.this, "Array File Name is Empty, Record First",
-                            Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -245,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                                 {
                                     // The code in this function will be executed when the dialog OK button is pushed
                                     m_chosen = chosenDir;
-                                    Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
+                                    Toast.makeText(MainActivity.this, R.string.filechosen + " : " +
                                             m_chosen, Toast.LENGTH_LONG).show();
                                     write(getApplicationContext(), arrayRPCobject,m_chosen);
                                 }
@@ -258,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(MainActivity.this, "No Actice List To Save " +
+                    Toast.makeText(MainActivity.this, R.string.emptylisttosave + " : " +
                             m_chosen, Toast.LENGTH_LONG).show();
                     Log.i("Saved","arrayRPCobject is  empty");
                 }
@@ -289,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }catch(Exception e)
                                 {
-                                    Toast.makeText(MainActivity.this, "File Error " +
+                                    Toast.makeText(MainActivity.this, R.string.fileerror + " : " +
                                             m_chosen, Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -396,12 +398,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAddItemDialog(Context c) {
-        final EditText taskEditText = new EditText(c);
+        final AdView mAdHelpView = new AdView(c);
+        mAdHelpView.setAdSize(AdSize.BANNER);
+        mAdHelpView.setAdUnitId("ca-app-pub-3373354348631607/2063661029");
+        AdRequest adHelpRequest = new AdRequest.Builder().build();
+
         AlertDialog dialog = new AlertDialog.Builder(c)
                 .setTitle(R.string.HelpWindow)
                 .setMessage(R.string.HelpText)
 
-               // .setView(taskEditText)
+                .setView(mAdHelpView)
               /*  .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -411,6 +417,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Close", null)
                 .create();
         dialog.show();
+        mAdHelpView.loadAd(adHelpRequest);
     }
 
 }

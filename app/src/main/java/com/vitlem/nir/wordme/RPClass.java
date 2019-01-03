@@ -62,12 +62,12 @@ public class RPClass {
                     // Do something when media player end playing
                     Playing=false;
                     stopPlaying();
-                    Log.i("public void startPlaying() ", "End Playing " );
+                    Log.i("public void startPlayin", "End Playing " );
 
                 }
             });
         } catch (IOException e) {
-            Log.e("public void startPlaying() ", "prepare() failed " + e.getMessage());
+            Log.e("public void startPlayin", "prepare() failed " + e.getMessage());
         }
     }
 
@@ -81,7 +81,7 @@ public class RPClass {
             Playing=true;
 
             mPlayer.setDataSource(mFileNameArray.get(0));
-            Log.i("public void startPlaying(String mFileName) ", "Start Playing " + mFileNameArray.get(0) );
+            Log.i("public void startPlayin", "Start Playing " + mFileNameArray.get(0) );
             mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mPlayer.prepare();
             mPlayer.setVolume(200f, 200f);
@@ -94,7 +94,7 @@ public class RPClass {
                     if (mFileNameArray.isEmpty()){
                         Playing=false;
                         stopPlaying();
-                        Log.i("public void startPlaying(String mFileName) ", "End Playing " );
+                        Log.i("public void startPlayin", "End Playing " );
                     }else
                     {
                         try {
@@ -109,7 +109,7 @@ public class RPClass {
                 }
             });
         } catch (IOException e) {
-            Log.i("public void startPlaying() ", "prepare() failed " + e.getMessage());
+            Log.i("public void startPlayin", "prepare() failed " + e.getMessage());
         }
     }
 

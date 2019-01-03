@@ -11,4 +11,14 @@
     <string name="SBWText">Seconds between words</string>
     <string name="HelpWindow">How To Use?</string>
     <string name="HelpText">"1) Press RECORD and say one word to the microphone.\n2) Press STOP when you finish.\n3) Press PLAY if you want to hear your last word.\n4) Press ADD to add the last word you record to the list.\n5) After you finish recording all the words press SHUFFLE AND PLAY to hear the words.\n * You can save your list by pressing SAVE.\n * You can load saved list by pressing LOAD.\n\n ***Enjoy and Good Luck***"</string>
+    <string name="playlist">There is Playing Active</string>
+    <string name="arrayisempty">Array File Name is Empty, Record First</string>
+    <string name="filechosen">Chosen FileOpenDialog File:</string>
+    <string name="emptylisttosave">No Active List To Save</string>
+    <string name="fileerror">File Error</string>
+    <string name="Recordingstarted">Recording started</string>
+    <string name="RecordingCompleted">Recording Completed</string>
+    <string name="RecordingPlaying">Recording Playing</string>
+    <string name="Playtemp">Temp File Name is Empty, Record First</string>
+    <string name="AddnewFile">Add new File</string>
 </resources>
