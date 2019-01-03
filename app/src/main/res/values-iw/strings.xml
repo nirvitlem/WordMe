@@ -23,4 +23,6 @@
     <string name="Playtemp">לא קיים קובץ, יש להקליט לפני</string>
     <string name="AddnewFile">קובץ התווסף לרשימה</string>
     <string name="endplaying">השמעת רשימה הסתיימה</string>
+    <string name="stopplaying">הפסק השמעה</string>
+    <string name="stopplaylist">השמעת הרשימה הופסקה</string>
 </resources>

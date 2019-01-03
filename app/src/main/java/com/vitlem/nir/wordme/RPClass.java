@@ -93,7 +93,7 @@ public class RPClass {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     // Do something when media player end playing
-                    if (mFileNameArray.isEmpty()){
+                    if (mFileNameArray.isEmpty() || !Playing){
                         Playing=false;
                         stopPlaying();
                         Toast.makeText(MainActivity.mainc, R.string.endplaying, Toast.LENGTH_LONG).show();
@@ -104,12 +104,12 @@ public class RPClass {
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                try {
+                               /* try {
                                     Thread.sleep(tBet);
                                 } catch (InterruptedException e) {
                                     // TODO Auto-generated catch block
                                     e.printStackTrace();
-                                }
+                                }*/
                                 startPlaying(mFileNameArray);
                             }
                         }, tBet);

@@ -22,4 +22,6 @@
     <string name="Playtemp">Temp File Name is Empty, Record First</string>
     <string name="AddnewFile">Add new File</string>
     <string name="endplaying">Finish Play List</string>
+    <string name="stopplaying">Stop Playing</string>
+    <string name="stopplaylist">Stop Play List</string>
 </resources>

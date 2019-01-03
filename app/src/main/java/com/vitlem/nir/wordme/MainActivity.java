@@ -59,25 +59,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Resources res = getApplicationContext().getResources();
         mainc=getApplicationContext();
-        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
-       // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-
-
-
-        //Locale locale = new Locale("en","US");
-        //Locale.setDefault(locale);
-
-       // Configuration config = new Configuration();
-        //config.locale = locale;
-
-      //  res.updateConfiguration(config, res.getDisplayMetrics());
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-
-
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET},MY_PERMISSIONS_REQUEST);
-        //ConstraintLayout linrtl=(ConstraintLayout)findViewById(R.id.Mlayout);
-        //linrtl.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         MobileAds.initialize(this, "ca-app-pub-3373354348631607~9109325808");
         AdView mAdView = findViewById(R.id.adViewUP);
@@ -218,8 +202,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (RPClass.Playing) {
-                    Toast.makeText(MainActivity.this, R.string.playlist,Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.stopplaylist,Toast.LENGTH_LONG).show();
+                    RPClass.Playing=false;
+                    RunButton.setText(R.string.ShuffeText);
                 } else {
+
                     Log.i("RunButton", "ClickRunButton");
                     if (!arrayRPCobject.isEmpty()) {
                         Log.i("arrayRPCobject", "arrayRPCobjectisNotEmpty");
@@ -231,14 +218,8 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             rTempPalyingObject.tBet = 10000;
                         }
-                        //new Thread(new Runnable() {
-                            //@Override
-                          //  public void run() {
-                                rTempPalyingObject.startPlaying(arrayRPCobject);
-                          //  }
-                     //   }).run();
-
-
+                        rTempPalyingObject.startPlaying(arrayRPCobject);
+                        RunButton.setText(R.string.stopplaying);
 
                     } else {
                         Log.i("arrayRPCobject", "arrayRPCobjectisEmpty");
@@ -305,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (m_chosen != "") {
                                             arrayRPCobject.clear();
                                             arrayRPCobject = read(getApplicationContext(), m_chosen);
+                                            index=arrayRPCobject.size();
                                             tSum.setText(String.valueOf(arrayRPCobject.size()));
                                         }
                                     } catch (Exception e) {
