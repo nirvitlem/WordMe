@@ -4,7 +4,9 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,16 +96,24 @@ public class RPClass {
                     if (mFileNameArray.isEmpty()){
                         Playing=false;
                         stopPlaying();
+                        Toast.makeText(MainActivity.mainc, R.string.endplaying, Toast.LENGTH_LONG).show();
                         Log.i("public void startPlayin", "End Playing " );
                     }else
                     {
-                        try {
-                            Thread.sleep(tBet);
-                        } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        startPlaying(mFileNameArray);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                try {
+                                    Thread.sleep(tBet);
+                                } catch (InterruptedException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                }
+                                startPlaying(mFileNameArray);
+                            }
+                        }, tBet);
+
                     }
 
                 }

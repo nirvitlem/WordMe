@@ -22,4 +22,5 @@
     <string name="RecordingPlaying">"משמיע הקלטה "</string>
     <string name="Playtemp">לא קיים קובץ, יש להקליט לפני</string>
     <string name="AddnewFile">קובץ התווסף לרשימה</string>
+    <string name="endplaying">השמעת רשימה הסתיימה</string>
 </resources>

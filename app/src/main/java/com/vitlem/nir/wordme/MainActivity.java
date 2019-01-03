@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public final int MY_PERMISSIONS_REQUEST=1;
+    public static Context mainc;
     private String TempFileName;
     private Integer index= 0;
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Resources res = getApplicationContext().getResources();
-
+        mainc=getApplicationContext();
         // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
        // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
@@ -113,33 +114,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.i("RecordButton", "ClickRecordButton");
-                if (!Recording) {
-                    RecordButton.setText(R.string.RecordingText);
-                    RunButton.setEnabled(false);
-                    PlayButton.setEnabled(false);
-                    AddButton.setEnabled(false);
-                    Log.i("RecordButton", "startRecording");
-                    Toast.makeText(MainActivity.this, R.string.Recordingstarted,
-                            Toast.LENGTH_LONG).show();
-                    Recording = true;
-                    TempRPCobject = new RPClass();
-                    TempFileName = getFileName()+".3pg";
-                    TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
-                    TempRPCobject.startRecording();
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist, Toast.LENGTH_LONG).show();
                 } else {
-                    if (TempRPCobject != null) {
-                        Log.i("RecordButton", "TempRPCobject!=Null");
-                        Log.i("RecordButton", "stopRecording");
-                        Toast.makeText(MainActivity.this, R.string.RecordingCompleted,
+                    if (!Recording) {
+                        RecordButton.setText(R.string.RecordingText);
+                        RunButton.setEnabled(false);
+                        PlayButton.setEnabled(false);
+                        AddButton.setEnabled(false);
+                        Log.i("RecordButton", "startRecording");
+                        Toast.makeText(MainActivity.this, R.string.Recordingstarted,
                                 Toast.LENGTH_LONG).show();
-                        RecordButton.setText(R.string.RecordText);
-                        RunButton.setEnabled(true);
-                        PlayButton.setEnabled(true);
-                        AddButton.setEnabled(true);
-                        Recording = false;
-                        TempRPCobject.stopRecording();
+                        Recording = true;
+                        TempRPCobject = new RPClass();
+                        TempFileName = getFileName() + ".3pg";
+                        TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
+                        TempRPCobject.startRecording();
                     } else {
-                        Log.i("RecordButton", "Stop Record TempRPCobject==Null");
+                        if (TempRPCobject != null) {
+                            Log.i("RecordButton", "TempRPCobject!=Null");
+                            Log.i("RecordButton", "stopRecording");
+                            Toast.makeText(MainActivity.this, R.string.RecordingCompleted,
+                                    Toast.LENGTH_LONG).show();
+                            RecordButton.setText(R.string.RecordText);
+                            RunButton.setEnabled(true);
+                            PlayButton.setEnabled(true);
+                            AddButton.setEnabled(true);
+                            Recording = false;
+                            TempRPCobject.stopRecording();
+                        } else {
+                            Log.i("RecordButton", "Stop Record TempRPCobject==Null");
+                        }
                     }
                 }
             }
@@ -149,29 +154,32 @@ public class MainActivity extends AppCompatActivity {
         PlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("PlayButton","ClickPlayButton");
-                if (TempRPCobject != null) {
-                    Log.i("PlayButton","TempRPCobject=!Null");
-                    if (TempFileName!="") {
-                        if (!TempRPCobject.Playing) {
-                            PlayButton.setText("Playing");
-                            Log.i("PlayButton", "startPlaying");
-                            Toast.makeText(MainActivity.this, R.string.RecordingPlaying,
-                                    Toast.LENGTH_LONG).show();
-                            TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
-                            TempRPCobject.startPlaying();
-                            PlayButton.setText("Play");
+                Log.i("PlayButton", "ClickPlayButton");
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist, Toast.LENGTH_LONG).show();
+                } else {
+                    if (TempRPCobject != null) {
+                        Log.i("PlayButton", "TempRPCobject=!Null");
+                        if (TempFileName != "") {
+                            if (!TempRPCobject.Playing) {
+                                PlayButton.setText("Playing");
+                                Log.i("PlayButton", "startPlaying");
+                                Toast.makeText(MainActivity.this, R.string.RecordingPlaying,
+                                        Toast.LENGTH_LONG).show();
+                                TempRPCobject.SetFileName(getApplicationContext(), TempFileName);
+                                TempRPCobject.startPlaying();
+                                PlayButton.setText("Play");
+                            } else {
+                                // PlayButton.setText("Play");
+                                // Log.i("PlayButton", "startPlaying");
+                                TempRPCobject.stopPlaying();
+                            }
                         } else {
-                           // PlayButton.setText("Play");
-                           // Log.i("PlayButton", "startPlaying");
-                            TempRPCobject.stopPlaying();
+                            Toast.makeText(MainActivity.this, R.string.Playtemp,
+                                    Toast.LENGTH_LONG).show();
                         }
-                    }else
-                    {
-                        Toast.makeText(MainActivity.this, R.string.Playtemp,
-                                Toast.LENGTH_LONG).show();
-                    }
 
+                    }
                 }
             }
         });
@@ -180,15 +188,19 @@ public class MainActivity extends AppCompatActivity {
         AddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("AddButton","ClickAddButtonn");
-                if (TempRPCobject != null) {
-                    arrayRPCobject.add(TempRPCobject.GetFileName());
-                    Toast.makeText(MainActivity.this, R.string.AddnewFile,
-                            Toast.LENGTH_LONG).show();
-                    index++;
-                    tSum.setText(  String.valueOf(index)  );
-                    Log.i("AddButton","TempRPCobject.GetFileName() " + TempRPCobject.GetFileName());
-                    TempRPCobject=null;
+                Log.i("AddButton", "ClickAddButtonn");
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist, Toast.LENGTH_LONG).show();
+                } else {
+                    if (TempRPCobject != null) {
+                        arrayRPCobject.add(TempRPCobject.GetFileName());
+                        Toast.makeText(MainActivity.this, R.string.AddnewFile,
+                                Toast.LENGTH_LONG).show();
+                        index++;
+                        tSum.setText(String.valueOf(index));
+                        Log.i("AddButton", "TempRPCobject.GetFileName() " + TempRPCobject.GetFileName());
+                        TempRPCobject = null;
+                    }
                 }
             }
         });
@@ -219,7 +231,13 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             rTempPalyingObject.tBet = 10000;
                         }
-                        rTempPalyingObject.startPlaying(arrayRPCobject);
+                        //new Thread(new Runnable() {
+                            //@Override
+                          //  public void run() {
+                                rTempPalyingObject.startPlaying(arrayRPCobject);
+                          //  }
+                     //   }).run();
+
 
 
                     } else {
@@ -235,34 +253,34 @@ public class MainActivity extends AppCompatActivity {
             String m_chosen;
             @Override
             public void onClick(View view) {
-                Log.i("SaveButton","ClickSaveButton");
-                if (!arrayRPCobject.isEmpty()) {
-                    Log.i("Saved","arrayRPCobject is not empty");
+                Log.i("SaveButton", "ClickSaveButton");
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist, Toast.LENGTH_LONG).show();
+                } else {
+                    if (!arrayRPCobject.isEmpty()) {
+                        Log.i("Saved", "arrayRPCobject is not empty");
 
-                    SimpleFileDialog FileSaveDialog =  new SimpleFileDialog(MainActivity.this, "FileSave",
-                            new SimpleFileDialog.SimpleFileDialogListener()
-                            {
-                                @Override
-                                public void onChosenDir(String chosenDir)
-                                {
-                                    // The code in this function will be executed when the dialog OK button is pushed
-                                    m_chosen = chosenDir;
-                                    Toast.makeText(MainActivity.this, R.string.filechosen + " : " +
-                                            m_chosen, Toast.LENGTH_LONG).show();
-                                    write(getApplicationContext(), arrayRPCobject,m_chosen);
-                                }
-                            });
+                        SimpleFileDialog FileSaveDialog = new SimpleFileDialog(MainActivity.this, "FileSave",
+                                new SimpleFileDialog.SimpleFileDialogListener() {
+                                    @Override
+                                    public void onChosenDir(String chosenDir) {
+                                        // The code in this function will be executed when the dialog OK button is pushed
+                                        m_chosen = chosenDir;
+                                        Toast.makeText(MainActivity.this, R.string.filechosen + " : " +
+                                                m_chosen, Toast.LENGTH_LONG).show();
+                                        write(getApplicationContext(), arrayRPCobject, m_chosen);
+                                    }
+                                });
 
-                    //You can change the default filename using the public variable "Default_File_Name"
-                    FileSaveDialog.Default_File_Name = "mylist";
-                    FileSaveDialog.chooseFile_or_Dir();
+                        //You can change the default filename using the public variable "Default_File_Name"
+                        FileSaveDialog.Default_File_Name = "mylist";
+                        FileSaveDialog.chooseFile_or_Dir();
 
-                }
-                else
-                {
-                    Toast.makeText(MainActivity.this, R.string.emptylisttosave + " : " +
-                            m_chosen, Toast.LENGTH_LONG).show();
-                    Log.i("Saved","arrayRPCobject is  empty");
+                    } else {
+                        Toast.makeText(MainActivity.this, R.string.emptylisttosave + " : " +
+                                m_chosen, Toast.LENGTH_LONG).show();
+                        Log.i("Saved", "arrayRPCobject is  empty");
+                    }
                 }
             }
         });
@@ -271,43 +289,38 @@ public class MainActivity extends AppCompatActivity {
             String m_chosen;
             @Override
             public void onClick(View view) {
-
-                SimpleFileDialog FileOpenDialog =  new SimpleFileDialog(MainActivity.this, "FileOpen",
-                        new SimpleFileDialog.SimpleFileDialogListener()
-                        {
-                            @Override
-                            public void onChosenDir(String chosenDir)
-                            {
-                                // The code in this function will be executed when the dialog OK button is pushed
-                                m_chosen = chosenDir;
-                                Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
-                                        m_chosen, Toast.LENGTH_LONG).show();
-                                Log.i("LoaddButton","ClickLoaddButton " + m_chosen);
-                                try {
-                                    if (m_chosen != "") {
-                                        arrayRPCobject.clear();
-                                        arrayRPCobject = read(getApplicationContext(), m_chosen);
-                                        tSum.setText(String.valueOf(arrayRPCobject.size()));
-                                    }
-                                }catch(Exception e)
-                                {
-                                    Toast.makeText(MainActivity.this, R.string.fileerror + " : " +
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist, Toast.LENGTH_LONG).show();
+                } else {
+                    SimpleFileDialog FileOpenDialog = new SimpleFileDialog(MainActivity.this, "FileOpen",
+                            new SimpleFileDialog.SimpleFileDialogListener() {
+                                @Override
+                                public void onChosenDir(String chosenDir) {
+                                    // The code in this function will be executed when the dialog OK button is pushed
+                                    m_chosen = chosenDir;
+                                    Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " +
                                             m_chosen, Toast.LENGTH_LONG).show();
+                                    Log.i("LoaddButton", "ClickLoaddButton " + m_chosen);
+                                    try {
+                                        if (m_chosen != "") {
+                                            arrayRPCobject.clear();
+                                            arrayRPCobject = read(getApplicationContext(), m_chosen);
+                                            tSum.setText(String.valueOf(arrayRPCobject.size()));
+                                        }
+                                    } catch (Exception e) {
+                                        Toast.makeText(MainActivity.this, R.string.fileerror + " : " +
+                                                m_chosen, Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                //You can change the default filename using the public variable "Default_File_Name"
-                FileOpenDialog.Default_File_Name = "";
-                FileOpenDialog.chooseFile_or_Dir(getApplicationContext().getFilesDir().getAbsolutePath()
-                        + File.separator + "serlization");
-
+                    //You can change the default filename using the public variable "Default_File_Name"
+                    FileOpenDialog.Default_File_Name = "";
+                    FileOpenDialog.chooseFile_or_Dir(getApplicationContext().getFilesDir().getAbsolutePath()
+                            + File.separator + "serlization");
 
 
-
-
-
-
+                }
             }
         });
     }
