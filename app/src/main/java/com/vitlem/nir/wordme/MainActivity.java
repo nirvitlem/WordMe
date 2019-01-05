@@ -3,6 +3,7 @@ package com.vitlem.nir.wordme;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         final Button RecordButton = findViewById(R.id.RecordButton);
         final Button SaveButton = findViewById(R.id.SaveButton);
         final Button LoadButton = findViewById(R.id.LoadButton);
+        final Button NewListButton = findViewById(R.id.NewListButton);
         final Button hButton = findViewById(R.id.bHelp);
         final TextView tSum = findViewById(R.id.tSumWords);
 
@@ -195,6 +197,37 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("hButton","ClickhButtonn");
                 showAddItemDialog(MainActivity.this);
+            }
+        });
+
+        NewListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("NewListButton","ClickNewListButton");
+                if (RPClass.Playing) {
+                    Toast.makeText(MainActivity.this, R.string.playlist, Toast.LENGTH_LONG).show();
+                } else {
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int choice) {
+                            switch (choice) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                        arrayRPCobject.clear();
+                                        TempRPCobject= null;
+                                        index=0;
+                                        tSum.setText(String.valueOf(index));
+                                    break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage(R.string.restartText)
+                            .setPositiveButton(R.string.yesText, dialogClickListener)
+                            .setNegativeButton(R.string.noText, dialogClickListener).show();
+                }
             }
         });
 

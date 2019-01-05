@@ -131,8 +131,8 @@
 
     <Button
         android:id="@+id/LoadButton"
-        android:layout_width="245dp"
-        android:layout_height="wrap_content"
+        android:layout_width="118dp"
+        android:layout_height="49dp"
         android:layout_marginStart="72dp"
         android:layout_marginEnd="8dp"
         android:drawableLeft="@drawable/icons8upload24"
@@ -179,5 +179,15 @@
         android:drawableLeft="@drawable/icons8help48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/NewListButton"
+        android:layout_width="118dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:drawableLeft="@drawable/icons8restart24"
+        android:text="@string/newlistbutton"
+        app:layout_constraintStart_toEndOf="@+id/LoadButton"
+        tools:layout_editor_absoluteY="384dp" />
 
 </android.support.constraint.ConstraintLayout>

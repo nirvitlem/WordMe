@@ -15,4 +15,8 @@
     <string name="endplaying">השמעת רשימה הסתיימה</string>
     <string name="stopplaying">הפסק השמעה</string>
     <string name="stopplaylist">השמעת הרשימה הופסקה</string>
+    <string name="newlistbutton">חדש</string>
+    <string name="restartText">האם את\\ה בטוח שאת\\ה אוצה להתחיל רשימה חדשה?</string>
+    <string name="yesText">כן</string>
+    <string name="noText">לא</string>
 </resources>
