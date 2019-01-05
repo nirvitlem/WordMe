@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.style.UpdateLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public static Context mainc;
     private String TempFileName;
     private Integer index= 0;
-
+    public static Button Sbutton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         final Button NewListButton = findViewById(R.id.NewListButton);
         final Button hButton = findViewById(R.id.bHelp);
         final TextView tSum = findViewById(R.id.tSumWords);
-
+        Sbutton = new Button(getApplicationContext());
+        Sbutton=RunButton;
 
         EditText et= (EditText)findViewById(R.id.tBet);
         et.setOnClickListener(new View.OnClickListener(){
@@ -446,6 +448,12 @@ public class MainActivity extends AppCompatActivity {
                 .create();
         dialog.show();
         mAdHelpView.loadAd(adHelpRequest);
+    }
+
+    public static void setShuffleTextafterfinishPlaylist()
+    {
+        Sbutton.setText(R.string.ShuffeText);
+
     }
 
 }

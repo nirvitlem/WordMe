@@ -97,6 +97,7 @@ public class RPClass {
                         Playing=false;
                         stopPlaying();
                         Toast.makeText(MainActivity.mainc, R.string.endplaying, Toast.LENGTH_LONG).show();
+                        MainActivity.setShuffleTextafterfinishPlaylist();
                         Log.i("public void startPlayin", "End Playing " );
                     }else
                     {
